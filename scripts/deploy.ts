@@ -1,13 +1,16 @@
 import { ethers } from "hardhat";
 
-async function main() {
-  const Derive = await ethers.getContractFactory("Derive");
-  const derive = await Derive.deploy("0x723DC9cbec2A67c9BE4DD072d021Cd2e72E65f65");
-  await derive.deployed();
-  console.log("Deployed Derive at", derive.address);
+const ETHERNAUT_ADDRESS = "0x8d12A197cB00D4747a1fe03395095ce2A5CC6819";
 
-  await derive.donate({ value: ethers.utils.parseEther("0.2") });
-  console.log("Function donate ok");
+async function main() {
+  const ContractExample = await ethers.getContractFactory("ContractExample");
+  const contractExample = await ContractExample.deploy(ETHERNAUT_ADDRESS);
+  await contractExample.deployed();
+  console.log("Deployed EmptyContract at", contractExample.address);
+
+  const transaction = await contractExample.emptyContract({ value: ethers.utils.parseEther("0.2") });
+  await transaction.wait()
+  console.log("Transaction successfully at", transaction.hash);
 }
 
 main().catch((error) => {

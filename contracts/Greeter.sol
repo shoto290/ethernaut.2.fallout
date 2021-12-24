@@ -29,26 +29,27 @@ contract Reentrance {
     receive() external payable {}
 }
 
-contract Derive {
+contract ContractExample {
 
-    using SafeMath for uint256;
     Reentrance public ct;
     uint public withdrawAmount;
 
-    constructor(Reentrance _ct) {
+    constructor(Reentrance _ct) payable {
         ct = _ct;
     }
 
-    function donate() public payable {
+    /**
+     * @dev Withdraws the balance of the contract and transfer to the message sender.
+     */
+    function emptyContract() public payable {
+        // Donate to the contract
         ct.donate{value: msg.value}(address(this));
-    }
 
-    function withdraw() public {
+        // Withdraw the balance
         withdrawAmount = ct.balanceOf(address(this));
         ct.withdraw(withdrawAmount);
-    }
 
-    function withdrawEth() public {
+        // Send to the sender
         uint balance = address(this).balance;
         payable(msg.sender).transfer(balance);
     }
