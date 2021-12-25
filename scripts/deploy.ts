@@ -1,13 +1,15 @@
-import { ethers } from "hardhat";
+import { ethers,  } from "hardhat";
+
+const ETHERNAUT_ADDRESS = "0xB13eF1031ADF0C370dEB789dA5Aa25362Da656f4";
 
 async function main() {
-  const Contract = await ethers.getContractFactory("HelloWorld");
-  const contract = await Contract.deploy();
-  console.log("Deploy HelloWorld contract at", contract.address);
+  const Fallout = await ethers.getContractFactory("Fallout");
+  const fallout = await Fallout.attach(ETHERNAUT_ADDRESS);
+  console.log("Deploy Fallout contract at", fallout.address);
 
-  const sayHelloTx = await contract.sayHello();
-  await sayHelloTx.wait();
-  console.log("Transaction sayHello finished", sayHelloTx.returns);
+  const fal1outTx = await fallout.Fal1out();
+  await fal1outTx.wait();
+  console.log("Transaction Fal1out finished", fal1outTx.hash);
 }
 
 main().catch((error) => {
