@@ -1,6 +1,6 @@
 import { ethers,  } from "hardhat";
 
-const ETHERNAUT_ADDRESS = "0xB13eF1031ADF0C370dEB789dA5Aa25362Da656f4";
+const ETHERNAUT_ADDRESS = "";
 
 async function main() {
   const Fallout = await ethers.getContractFactory("Fallout");
