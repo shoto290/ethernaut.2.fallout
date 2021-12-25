@@ -5,7 +5,8 @@
     "compile": "npx hardhat compile",
     "accounts": "npx hardhat accounts",
     "deploy-rinkeby": "npx hardhat run scripts/deploy.ts --network rinkeby",
-    "deploy-ropsten": "npx hardhat run scripts/deploy.ts --network ropsten"
+    "deploy-ropsten": "npx hardhat run scripts/deploy.ts --network ropsten",
+    "deploy-local": "npx hardhat run scripts/deploy.ts --network localhost"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.3",

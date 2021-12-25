@@ -1,23 +1,13 @@
 import { ethers } from "hardhat";
 
-const ETHERNAUT_ADDRESS = "";
-
 async function main() {
-  const Fallback = await ethers.getContractFactory("Fallback");
-  const fallback = await Fallback.attach(ETHERNAUT_ADDRESS);
-  console.log("Attach Fallback contract at", fallback.address);
+  const Contract = await ethers.getContractFactory("HelloWorld");
+  const contract = await Contract.deploy();
+  console.log("Deploy HelloWorld contract at", contract.address);
 
-  const contributeTx = await fallback.contribute({ value: ethers.utils.parseEther("0.0009") });
-  await contributeTx.wait();
-  console.log("Transaction contribute finished", contributeTx.hash);
-
-  const sendTx = await fallback.fallback({ value: ethers.utils.parseEther("0.0009") });
-  await sendTx.wait();
-  console.log("Transaction send finished", sendTx.hash);
-
-  const withdrawTx = await fallback.withdraw();
-  await withdrawTx.wait();
-  console.log("Transaction withdraw finished", withdrawTx.hash);
+  const sayHelloTx = await contract.sayHello();
+  await sayHelloTx.wait();
+  console.log("Transaction sayHello finished", sayHelloTx.returns);
 }
 
 main().catch((error) => {
